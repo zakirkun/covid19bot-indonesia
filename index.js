@@ -81,16 +81,16 @@ const thewuhanvirus_start = async() => {
                     diff_death = parseInt(t.deaths) - parseInt(exist_parse.deaths)
                     diff_recovered = parseInt(t.recovered) - parseInt(exist_parse.recovered)
                 }
-                let text = `COVID-19 di ${t.country} saat ini.
+                let text = `COVID-19 At ${t.country} This time.
 
 - Total: ${t.infection} ${diff_total > 0 ? `(+${diff_total})` : ''}
-- Perawatan: ${t.active_cases}
-- Sembuh: ${t.recovered} ${diff_recovered > 0 ? `(+${diff_recovered})` : ''}
-- Meninggal: ${t.deaths} ${diff_death > 0 ? `(+${diff_death})` : ''}
-- Tingkat kematian: ${t.mortality_rate}
-- Tingkat kesembuhan: ${t.recovery_rate}
+- Active case : ${t.active_cases}
+- Recovered: ${t.recovered} ${diff_recovered > 0 ? `(+${diff_recovered})` : ''}
+- Deaths: ${t.deaths} ${diff_death > 0 ? `(+${diff_death})` : ''}
+- Death rate: ${t.mortality_rate}
+- Recovery rate: ${t.recovery_rate}
 
-Bersumber dari thebaselab
+Sourced from Thebaselab
 ${process.env.HASTAG}
 `
                 let generate_img_query = {...{source: 'thebaselab', date: new Date().toLocaleDateString()}, ...t} 
@@ -119,14 +119,14 @@ const worldometers_start = async() => {
             diff_death = parseInt(update.deaths) - parseInt(exist_parse.deaths)
             diff_recovered = parseInt(update.recovered) - parseInt(exist_parse.recovered)
         }
-        let text = `COVID-19 di ${update.country} saat ini.
+        let text = `COVID-19 di ${update.country} This time.
 
 - Total: ${update.infection} ${diff_total > 0 ? `(+${diff_total})` : ''}
-- Perawatan: ${update.active_cases}
-- Sembuh: ${update.recovered} ${diff_recovered > 0 ? `(+${diff_recovered})` : ''}
-- Meninggal: ${update.deaths} ${diff_death > 0 ? `(+${diff_death})` : ''}
+- Active case: ${update.active_cases}
+- Recovered: ${update.recovered} ${diff_recovered > 0 ? `(+${diff_recovered})` : ''}
+- Deaths: ${update.deaths} ${diff_death > 0 ? `(+${diff_death})` : ''}
 
-Bersumber dari worldometers
+Sourced from Worldometers
 ${process.env.HASTAG}
 `
         let generate_img_query = {...{source: 'worldometers', date: new Date().toLocaleDateString()}, ...update}
@@ -153,14 +153,14 @@ const kawalcovid19_start = async() => {
             diff_death = parseInt(update.deaths) - parseInt(exist_parse.deaths)
             diff_recovered = parseInt(update.recovered) - parseInt(exist_parse.recovered)
         }
-        let text = `COVID-19 di ${update.country} saat ini.
+        let text = `COVID-19 di ${update.country} This time.
 
 - Total: ${update.infection} ${diff_total > 0 ? `(+${diff_total})` : ''}
-- Perawatan: ${update.active_cases}
-- Sembuh: ${update.recovered} ${diff_recovered > 0 ? `(+${diff_recovered})` : ''}
-- Meninggal: ${update.deaths} ${diff_death > 0 ? `(+${diff_death})` : ''}
+- Active case: ${update.active_cases}
+- Recovered: ${update.recovered} ${diff_recovered > 0 ? `(+${diff_recovered})` : ''}
+- Deaths: ${update.deaths} ${diff_death > 0 ? `(+${diff_death})` : ''}
 
-Bersumber dari kawalcovid19
+Sourced from kawalcovid19.id
 ${process.env.HASTAG}
 `
         let generate_img_query = {...{source: 'kawalcovid19', date: new Date().toLocaleDateString()}, ...update}
@@ -184,12 +184,12 @@ const mathdroid_start = async () => {
     let text = ""
     let arr_text = []
     update.forEach(element => {
-        text = `- (${element.provinsi})` + ` positif: ${element.kasusPosi} | sembuh: ${element.kasusSemb} | meninggal: ${element.kasusMeni}`
+        text = `- (${element.provinsi})` + ` Positif: ${element.kasusPosi} | Recovered: ${element.kasusSemb} | Deaths: ${element.kasusMeni}`
         arr_text.push(text)
     })
     
     let chunkarray = chunkArr(arr_text, 3)
-    const start_tweet = await tweet(`Jumlah kasus per-provinsi di Indonesia saat ini. (${new Date().toLocaleString()})`)
+    const start_tweet = await tweet(`Current Number of Cases in Indonesia. (${new Date().toLocaleString()})`)
     let latest_id = start_tweet.id_str
     for (let i = 0; i < chunkarray.length; i++) {
         const txt = chunkarray[i];
